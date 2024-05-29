@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -6,7 +7,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
-    public Client(String ip, int puerto) {
+    public Client(String ip, int puerto) throws IOException {
         Socket socket = new Socket(ip, puerto);
         System.out.println("Conexion exitosa con el servidor.");
         
@@ -28,12 +29,17 @@ public class Client {
         System.out.println("Socket cerrado.");
     }
     public static void main(String[] args) {
-        Scanner consola = new Scanner();
+        Scanner consola = new Scanner(System.in);
         System.out.print("Ingresar IP: ");
         String ip = consola.nextLine();
         System.out.print("Ingresar puerto: ");
         Integer puerto = Integer.parseInt( consola.nextLine() );
         
-        new Client(ip, puerto);
+        try {
+            new Client(ip, puerto);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
