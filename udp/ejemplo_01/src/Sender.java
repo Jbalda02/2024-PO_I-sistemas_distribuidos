@@ -33,7 +33,7 @@ public class Sender {
 
             mensaje = (new String(buffer)).trim();
             System.out.println("Mensaje recibido: " + mensaje);
-
+            
             consola.close();
             socket.close();
         } catch (SocketException e) {
