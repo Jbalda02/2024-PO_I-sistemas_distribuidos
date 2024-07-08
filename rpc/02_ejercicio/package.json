@@ -1,0 +1,17 @@
+{
+  "name": "rpc",
+  "version": "1.0.0",
+  "description": "Un ejemplo sobre el uso de gRPC",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rpc"
+  ],
+  "author": "Guillermo Pizarro",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.10.10"
+  }
+}
