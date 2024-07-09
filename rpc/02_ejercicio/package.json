@@ -12,6 +12,7 @@
   "author": "Guillermo Pizarro",
   "license": "GPL-3.0",
   "dependencies": {
-    "@grpc/grpc-js": "^1.10.10"
+    "@grpc/grpc-js": "^1.10.10",
+    "express": "^4.19.2"
   }
 }
