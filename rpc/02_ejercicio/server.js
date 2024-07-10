@@ -1,5 +1,6 @@
 const grpc = require('@grpc/grpc-js')
 const protoLoder = require('@grpc/proto-loader')
+const mariadb = require('mariadb')
 
 const PROTO_FILE = './proto/user.proto'
 
@@ -12,7 +13,29 @@ async function main() {
     const user_proto = grpc.loadPackageDefinition(package_definition).UserService
     const server = new grpc.Server()
 
+    const pool = mariadb.createPool({
+        host: 'localhost',
+        user: 'root',
+        password: '1234',
+        database: 'user_db'
+    })
+
     let users = []
+
+    async function getUsersFromDatabase() {
+        let conn;
+        try {
+            conn = await pool.getConnection();
+            const rows = await conn.query('SELECT * FROM users');
+            users = rows;
+        } catch (err) {
+            console.error(err);
+        } finally {
+            if (conn) conn.release(); // release to pool
+        }
+    }
+
+    getUsersFromDatabase().catch(console.error);
 
     server.addService(user_proto.service, {
         getUsers: (_, callback) => {
